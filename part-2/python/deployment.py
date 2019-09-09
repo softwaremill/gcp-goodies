@@ -74,7 +74,7 @@ def GenerateConfig(context):
         'data': {
             'SOME_VARIABLE': 'custom-value-deployed'
         }
-
+      }
   }, {
       'name': name_prefix + '-deployment',
       'type': cluster_types['Deployment'],
