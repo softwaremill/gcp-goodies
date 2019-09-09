@@ -1,0 +1,14 @@
+#
+# This is modified version of code provided by Google at:
+# https://github.com/GoogleCloudPlatform/deploymentmanager-samples
+#
+
+imports:
+- path: deployment.py
+
+resources:
+- name: my-service
+  type: deployment.py
+  properties:
+    clusterType: <cluster-type>
+    image: gcr.io/deployment-manager-examples/nodejsservicestatic
