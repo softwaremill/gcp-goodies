@@ -20,6 +20,11 @@ def GenerateConfig(context):
           ':',
           '/api/v1/namespaces/{namespace}/services'
           ]),
+      'ConfigMap': ''.join([
+                cluster_types_root,
+                ':',
+                '/api/v1/namespaces/{namespace}/configmaps'
+                ]),
       'Deployment': ''.join([
           cluster_types_root,
           '-apps',
@@ -56,6 +61,20 @@ def GenerateConfig(context):
               }
           }
       }
+  },{
+      'name': name_prefix + '-deployment',
+      'type': cluster_types['ConfigMap'],
+      'properties': {
+        'apiVersion': 'v1',
+        'kind': 'ConfigMap',
+        'namespace': 'default',
+        'metadata': {
+            'name': 'dm-configmap'
+        },
+        'data': {
+            'SOME_VARIABLE': 'custom-value-deployed'
+        }
+
   }, {
       'name': name_prefix + '-deployment',
       'type': cluster_types['Deployment'],
