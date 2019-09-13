@@ -1,0 +1,17 @@
+.idea
+part-5/play-scala-stackdriver-logging/bin/
+part-5/play-scala-stackdriver-logging/db
+part-5/play-scala-stackdriver-logging/.eclipse
+part-5/play-scala-stackdriver-logging/lib/
+part-5/play-scala-stackdriver-logging/logs/
+part-5/play-scala-stackdriver-logging/modules
+part-5/play-scala-stackdriver-logging/project/project
+part-5/play-scala-stackdriver-logging/project/target
+part-5/play-scala-stackdriver-logging/target
+part-5/play-scala-stackdriver-logging/tmp/
+part-5/play-scala-stackdriver-logging/test-result
+part-5/play-scala-stackdriver-logging/server.pid
+part-5/play-scala-stackdriver-logging/*.eml
+part-5/play-scala-stackdriver-logging/dist/
+part-5/play-scala-stackdriver-logging/.cache
+part-5/play-scala-stackdriver-logging/.idea
