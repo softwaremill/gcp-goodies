@@ -18,6 +18,9 @@ scalacOptions ++= Seq(
   "-Xfatal-warnings"
 )
 
+sources in (Compile,doc) := Seq.empty
+publishArtifact in (Compile, packageDoc) := false
+
 import sbtrelease.ReleasePlugin.autoImport.ReleaseTransformations._
 
 releaseVersionBump := sbtrelease.Version.Bump.Next
