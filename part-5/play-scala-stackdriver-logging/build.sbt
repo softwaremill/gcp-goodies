@@ -27,7 +27,6 @@ releaseVersionBump := sbtrelease.Version.Bump.Next
 
 releaseIgnoreUntrackedFiles := true
 
-releaseIgnoreUntrackedFiles := true
 
 lazy val dockerRelease: ReleaseStep = { st: State =>
   val extracted = Project.extract(st)
@@ -44,11 +43,11 @@ releaseProcess := Seq[ReleaseStep](
   tagRelease,
   dockerRelease,
   setNextVersion,
-  commitNextVersion,
-  pushChanges
+  commitNextVersion
+//  pushChanges
 )
 
-dockerBaseImage := "eu.gcr.io/api-project-236368122719/alpine-java:8u162b12_jdk"
+dockerBaseImage := "anapsix/alpine-java:8"
 
 dockerRepository := Some("eu.gcr.io/api-project-123")
 
