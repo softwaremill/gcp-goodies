@@ -11,4 +11,5 @@ resources:
   type: cluster.py
   properties:
     zone: ZONE_TO_RUN
+    initialNodeCount: 3
 
