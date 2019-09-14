@@ -1,0 +1,15 @@
+#
+# This is modified version of code provided by Google at:
+# https://github.com/GoogleCloudPlatform/deploymentmanager-samples
+#
+
+imports:
+- path: deployment.py
+
+resources:
+- name: play-scala-stackdriver-logging
+  type: deployment.py
+  properties:
+    clusterType: <cluster-type>
+    image: eu.gcr.io/softwaremill-playground-2/play-scala-stackdriver-logging:1.1
+    port: 9000
