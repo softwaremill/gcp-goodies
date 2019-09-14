@@ -1,7 +1,5 @@
 name := """play-scala-stackdriver-logging"""
 
-version := "1.0-SNAPSHOT"
-
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 resolvers += Resolver.sonatypeRepo("snapshots")
