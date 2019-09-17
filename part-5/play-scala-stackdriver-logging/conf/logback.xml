@@ -13,6 +13,9 @@
     <encoder>
       <pattern>LOG %date [%level] %logger - %thread: %message%n%xException</pattern>
     </encoder>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>warn</level>
+    </filter>
   </appender>
 
   <appender name="ASYNCSTDOUT" class="ch.qos.logback.classic.AsyncAppender">
