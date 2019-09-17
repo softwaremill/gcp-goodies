@@ -10,6 +10,7 @@ libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3" % Test
 libraryDependencies += "com.h2database" % "h2" % "1.4.199"
 libraryDependencies += "com.google.cloud" % "google-cloud-logging-logback" % "0.108.0-alpha"
+libraryDependencies += "com.google.cloud" % "google-cloud-logging" % "1.90.0"
 
 scalacOptions ++= Seq(
   "-feature",
