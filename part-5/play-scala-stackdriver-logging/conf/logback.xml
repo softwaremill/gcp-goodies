@@ -16,7 +16,6 @@
     <encoder>
       <pattern>LOG %date [%level] %logger - %thread: %message%n%xException</pattern>
     </encoder>
-    <enhancer>utils.StackdriverEnhancer</enhancer> <!-- Optional -->
   </appender>
 
   <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
@@ -29,7 +28,6 @@
     <encoder>
       <pattern>LOG ERR %date [%level] %logger - %thread: %message%n%xException</pattern>
     </encoder>
-    <enhancer>utils.StackdriverEnhancer</enhancer> <!-- Optional -->
   </appender>
 
   <appender name="ASYNCSTDOUT" class="ch.qos.logback.classic.AsyncAppender">
