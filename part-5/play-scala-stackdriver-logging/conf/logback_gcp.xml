@@ -31,6 +31,7 @@
 
     <root level="INFO">
         <appender-ref ref="CLOUD"/>
+        <appender-ref ref="ASYNCSTDOUT" />
     </root>
 
 </configuration>
