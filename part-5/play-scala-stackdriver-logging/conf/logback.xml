@@ -2,20 +2,34 @@
 <configuration>
 
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>INFO</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>WARN</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
     <target>System.out</target>
     <encoder>
       <pattern>LOG %date [%level] %logger - %thread: %message%n%xException</pattern>
     </encoder>
+    <enhancer>utils.StackdriverEnhancer</enhancer> <!-- Optional -->
   </appender>
 
   <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>ERROR</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
     <target>System.err</target>
     <encoder>
-      <pattern>LOG %date [%level] %logger - %thread: %message%n%xException</pattern>
+      <pattern>LOG ERR %date [%level] %logger - %thread: %message%n%xException</pattern>
     </encoder>
-    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-      <level>warn</level>
-    </filter>
+    <enhancer>utils.StackdriverEnhancer</enhancer> <!-- Optional -->
   </appender>
 
   <appender name="ASYNCSTDOUT" class="ch.qos.logback.classic.AsyncAppender">
@@ -32,9 +46,6 @@
   <logger name="com.avaje.ebeaninternal.server.core.XmlConfigLoader" level="OFF" />
   <logger name="com.avaje.ebeaninternal.server.lib.BackgroundThread" level="OFF" />
   <logger name="com.gargoylesoftware.htmlunit.javascript" level="OFF" />
-
-  <logger name="application" level="DEBUG" />
-  <logger name="akka" level="DEBUG" />
 
   <root level="DEBUG">
     <appender-ref ref="ASYNCSTDOUT" />
