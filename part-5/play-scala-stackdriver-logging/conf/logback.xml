@@ -2,6 +2,14 @@
 <configuration>
 
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <target>System.out</target>
+    <encoder>
+      <pattern>LOG %date [%level] %logger - %thread: %message%n%xException</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+    <target>System.err</target>
     <encoder>
       <pattern>LOG %date [%level] %logger - %thread: %message%n%xException</pattern>
     </encoder>
@@ -11,6 +19,11 @@
     <appender-ref ref="STDOUT" />
   </appender>
 
+  <appender name="ASYNCSTDERR" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="STDERR" />
+  </appender>
+
+
   <!-- Off these ones as they are annoying, and anyway we manage configuration ourselves -->
   <logger name="com.avaje.ebean.config.PropertyMapLoader" level="OFF" />
   <logger name="com.avaje.ebeaninternal.server.core.XmlConfigLoader" level="OFF" />
@@ -18,9 +31,11 @@
   <logger name="com.gargoylesoftware.htmlunit.javascript" level="OFF" />
 
   <logger name="application" level="DEBUG" />
+  <logger name="akka" level="DEBUG" />
 
-  <root level="INFO">
+  <root level="DEBUG">
     <appender-ref ref="ASYNCSTDOUT" />
+    <appender-ref ref="ASYNCSTDERR" />
   </root>
 
 </configuration>
