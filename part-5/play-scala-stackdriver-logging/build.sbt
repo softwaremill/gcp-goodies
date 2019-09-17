@@ -27,7 +27,8 @@ dockerRepository := Some("eu.gcr.io/softwaremill-playground-2")
 
 dockerEntrypoint := Seq(
   "bin/play-scala-stackdriver-logging",
-  "-Dconfig.resource=application.conf"
+  "-Dconfig.resource=application.conf",
+  "-Dlogback.configurationFile=logback_gcp.xml"
 )
 
 

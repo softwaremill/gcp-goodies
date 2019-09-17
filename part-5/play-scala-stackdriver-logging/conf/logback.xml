@@ -8,29 +8,19 @@
   </appender>
 
   <appender name="ASYNCSTDOUT" class="ch.qos.logback.classic.AsyncAppender">
-    <appender-ref ref="STDOUT"/>
-  </appender>
-
-  <appender name="CLOUD" class="com.google.cloud.logging.logback.LoggingAppender">
-    <!-- Optional : filter logs at or above a level -->
-    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-      <level>INFO</level>
-    </filter>
-    <log>application.log</log> <!-- Optional : default java.log -->
-    <enhancer>utils.StackdriverEnhancer</enhancer> <!-- Optional -->
-    <flushLevel>WARN</flushLevel> <!-- Optional : default ERROR -->
+    <appender-ref ref="STDOUT" />
   </appender>
 
   <!-- Off these ones as they are annoying, and anyway we manage configuration ourselves -->
-  <logger name="com.avaje.ebean.config.PropertyMapLoader" level="OFF"/>
-  <logger name="com.avaje.ebeaninternal.server.core.XmlConfigLoader" level="OFF"/>
-  <logger name="com.avaje.ebeaninternal.server.lib.BackgroundThread" level="OFF"/>
-  <logger name="com.gargoylesoftware.htmlunit.javascript" level="OFF"/>
+  <logger name="com.avaje.ebean.config.PropertyMapLoader" level="OFF" />
+  <logger name="com.avaje.ebeaninternal.server.core.XmlConfigLoader" level="OFF" />
+  <logger name="com.avaje.ebeaninternal.server.lib.BackgroundThread" level="OFF" />
+  <logger name="com.gargoylesoftware.htmlunit.javascript" level="OFF" />
 
-  <logger name="application" level="DEBUG"/>
+  <logger name="application" level="DEBUG" />
 
   <root level="INFO">
-    <appender-ref ref="CLOUD"/>
+    <appender-ref ref="ASYNCSTDOUT" />
   </root>
 
 </configuration>
