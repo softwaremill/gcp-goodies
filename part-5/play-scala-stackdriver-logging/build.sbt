@@ -24,8 +24,7 @@ dockerBaseImage := "anapsix/alpine-java:8_jdk"
 dockerRepository := Some("eu.gcr.io/softwaremill-playground-2")
 
 dockerEntrypoint := Seq(
-  "bin/play-scala-stackdriver-logging",
-  "-Dconfig.resource=application.conf"
+  "bin/play-scala-stackdriver-logging"
 )
 
 
