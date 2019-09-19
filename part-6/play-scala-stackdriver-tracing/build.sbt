@@ -40,7 +40,7 @@ dockerRepository := Some("eu.gcr.io/softwaremill-playground-2")
 
 dockerEntrypoint := Seq(
   "bin/play-scala-stackdriver-tracing",
-  "-Dconfig.resource=application.conf"
+  "-Dconfig.resource=application-prod.conf"
 )
 
 
