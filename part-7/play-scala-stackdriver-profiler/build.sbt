@@ -33,6 +33,11 @@ javacOptions in compile ++= Seq(
   "-target", "1.8"
 )
 
+javaOptions in Universal ++= Seq(
+  // -J params will be added as jvm parameters
+  s"-J-agentpath:${(defaultLinuxInstallLocation in Docker).value}/opt/cprof/profiler_java_agent.so=-cprof_service=stackdriver-test4-profiler,-cprof_service_version=1.0.0"
+)
+
 sources in (Compile,doc) := Seq.empty
 publishArtifact in (Compile, packageDoc) := false
 
@@ -42,16 +47,8 @@ dockerRepository := Some("eu.gcr.io/softwaremill-playground-2")
 
 dockerEntrypoint := Seq(
   "bin/play-scala-stackdriver-profiler",
-  "-Dconfig.resource=application-prod.conf",
-  "-D-agentpath:cprof/profiler_java_agent.so=-cprof_service=play-scala-stacdriver-profiler,-cprof_service_version=1.0.0"
+  "-Dconfig.resource=application-prod.conf"
 )
-
-/*
-RUN mkdir -p /opt/cprof && \
-wget -q -O- https://storage.googleapis.com/cloud-profiler/java/latest/profiler_java_agent.tar.gz \
-  | tar xzv -C /opt/cprof
-  *
- */
 
 dockerCommands ++= Seq(
   // setting the run script executable
