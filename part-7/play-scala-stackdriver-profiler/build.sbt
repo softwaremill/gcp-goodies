@@ -35,7 +35,7 @@ javacOptions in compile ++= Seq(
 
 javaOptions in Universal ++= Seq(
   // -J params will be added as jvm parameters
-  s"-J-agentpath:${(defaultLinuxInstallLocation in Docker).value}/opt/cprof/profiler_java_agent.so=-cprof_service=stackdriver-test4-profiler,-cprof_service_version=1.0.0"
+  s"-J-agentpath:${(defaultLinuxInstallLocation in Docker).value}/opt/cprof/profiler_java_agent.so=-cprof_service=stackdriver-test5-profiler,-cprof_service_version=1.0.0,-cprof_enable_heap_sampling=true"
 )
 
 sources in (Compile,doc) := Seq.empty
