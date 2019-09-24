@@ -41,7 +41,7 @@ javaOptions in Universal ++= Seq(
 sources in (Compile,doc) := Seq.empty
 publishArtifact in (Compile, packageDoc) := false
 
-dockerBaseImage := "openjdk:8-jdk"
+dockerBaseImage := "openjdk:11-jdk"
 
 dockerRepository := Some("eu.gcr.io/softwaremill-playground-2")
 

@@ -3,7 +3,7 @@ import java.time.Clock
 
 import actor.{ChildHelloActor, HelloActor}
 import play.api.libs.concurrent.AkkaGuiceSupport
-import services.{ApiSampleService, ApplicationTimer, AtomicCounter, Counter}
+import services._
 
 /**
  * This class is a Guice module that tells Guice how to bind several
@@ -27,6 +27,7 @@ class Module extends AbstractModule with AkkaGuiceSupport{
     bind(classOf[Counter]).to(classOf[AtomicCounter])
 
     bind(classOf[ApiSampleService]).asEagerSingleton()
+    bind(classOf[ProfilerService]).to(classOf[ProfilerServiceImpl])
     bindActor[HelloActor]("hello-actor")
     bindActor[ChildHelloActor]("child-hello-actor")
   }

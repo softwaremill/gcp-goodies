@@ -13,7 +13,7 @@ import jp.co.bizreach.trace.play26.implicits.ZipkinTraceImplicits
 import play.api.Logger
 import play.api.libs.json.Json
 import play.api.mvc._
-import services.ApiSampleService
+import services._
 
 import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}
@@ -24,7 +24,8 @@ import scala.concurrent.{ExecutionContext, Future}
   */
 @Singleton
 class HomeController @Inject()(cc: ControllerComponents, @Named("hello-actor") helloActor: ActorRef,
-                               service: ApiSampleService)
+                               apiSampleService: ApiSampleService,
+                               profilerService: ProfilerService)
                               (implicit assetsFinder: AssetsFinder, ec: ExecutionContext, val tracer: ZipkinTraceServiceLike)
   extends AbstractController(cc) with ZipkinTraceImplicits {
 
@@ -41,7 +42,7 @@ class HomeController @Inject()(cc: ControllerComponents, @Named("hello-actor") h
   def once = Action.async { implicit req: Request[_] =>
     Logger.debug(req.headers.toSimpleMap.map { case (k, v) => s"${k}:${v}" }.toSeq.mkString("\n"))
 
-    service.sample("http://localhost:9992/api/once").map(_ => Ok(Json.obj("OK" -> "OK")))
+    apiSampleService.sample("http://localhost:9992/api/once").map(_ => Ok(Json.obj("OK" -> "OK")))
   }
 
   def nested = Action.async { implicit req: Request[_] =>
@@ -49,12 +50,18 @@ class HomeController @Inject()(cc: ControllerComponents, @Named("hello-actor") h
 
     implicit val timeout = Timeout(5000, TimeUnit.MILLISECONDS)
     val f1 = TraceableActorRef(helloActor) ? HelloActorMessage("This is an actor call!")
-    val f2 = service.sample("http://localhost:9992/api/nest")
+    val f2 = apiSampleService.sample("http://localhost:9992/api/nest")
 
     for {
       r1 <- f1
       r2 <- f2
     } yield Ok(Json.obj("result" -> (r1 + " " + r2)))
+  }
+
+  def smthToProfile(items: Long) = Action { implicit req =>
+    Logger.info(s"smthToProfile called with items: $items")
+    profilerService.executeMemoryIntensiveOperation(items)
+    Ok("Done")
   }
 
 }
