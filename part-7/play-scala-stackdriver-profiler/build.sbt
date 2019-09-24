@@ -29,8 +29,8 @@ scalacOptions ++= Seq(
 
 javacOptions in compile ++= Seq(
   "-encoding", "UTF-8",
-  "-source", "1.8",
-  "-target", "1.8"
+  "-source", "1.11",
+  "-target", "1.11"
 )
 
 javaOptions in Universal ++= Seq(
