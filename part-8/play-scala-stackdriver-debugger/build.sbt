@@ -47,7 +47,7 @@ dockerRepository := Some("eu.gcr.io/softwaremill-playground-2")
 dockerEntrypoint := Seq(
   "bin/play-scala-stackdriver-debugger",
   "-Dconfig.resource=application-prod.conf",
-  "-Dcom.google.cdbg.module=play-scala-stacdriver-debugger",
+  "-Dcom.google.cdbg.module=play-scala-stackdriver-debugger",
   "-Dcom.google.cdbg.version=1.0.0"
 )
 

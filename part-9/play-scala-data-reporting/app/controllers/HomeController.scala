@@ -33,7 +33,7 @@ class HomeController @Inject()(
   implicit val timeout: Timeout = Timeout(10 seconds)
 
   actorSystem.scheduler.schedule(5 seconds, 1 seconds) {
-    (workerActor ? actor.PushToBigTableCommand)
+    (workerActor ? actor.PushToDatabaseCommand)
   }
 
   /**

@@ -7,9 +7,14 @@ resolvers += Resolver.sonatypeRepo("snapshots")
 scalaVersion := "2.12.8"
 
 libraryDependencies += guice
-libraryDependencies += "com.google.cloud" % "google-cloud-bigtable" % "1.0.0"
-libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3" % Test
+libraryDependencies += "com.typesafe.play" %% "play-slick" % "3.0.3"
+libraryDependencies += "com.typesafe.play" %% "play-slick-evolutions" % "3.0.3"
+libraryDependencies += "com.typesafe.slick" %% "slick-hikaricp" % "3.0.3"
+libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.15"
 libraryDependencies += "com.h2database" % "h2" % "1.4.199"
+
+libraryDependencies += specs2 % Test
+
 
 scalacOptions ++= Seq(
   "-feature",
