@@ -13,6 +13,7 @@ libraryDependencies += "com.typesafe.slick" %% "slick-hikaricp" % "3.0.3"
 libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.15"
 libraryDependencies += "com.h2database" % "h2" % "1.4.199"
 
+libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3" % Test
 libraryDependencies += specs2 % Test
 
 
