@@ -9,7 +9,6 @@ scalaVersion := "2.12.8"
 libraryDependencies += guice
 libraryDependencies += "com.typesafe.play" %% "play-slick" % "3.0.3"
 libraryDependencies += "com.typesafe.play" %% "play-slick-evolutions" % "3.0.3"
-libraryDependencies += "com.typesafe.slick" %% "slick-hikaricp" % "3.0.3"
 libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.15"
 libraryDependencies += "com.h2database" % "h2" % "1.4.199"
 
