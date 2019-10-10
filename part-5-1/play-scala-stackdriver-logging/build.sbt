@@ -24,7 +24,7 @@ dockerBaseImage := "anapsix/alpine-java:8_jdk"
 
 //dockerRepository := Some("eu.gcr.io/softwaremill-playground-2")
 releaseIgnoreUntrackedFiles := true
-dockerRepository := Some("eu.gcr.io/api-project-236368122719")
+dockerRepository := Some("eu.gcr.io/reco-terraform")
 
 dockerEntrypoint := Seq(
   "bin/play-scala-stackdriver-logging",
