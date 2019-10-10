@@ -9,7 +9,7 @@ scalaVersion := "2.12.8"
 libraryDependencies += guice
 libraryDependencies += "com.typesafe.play" %% "play-slick" % "3.0.3"
 libraryDependencies += "com.typesafe.play" %% "play-slick-evolutions" % "3.0.3"
-libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.15"
+libraryDependencies += "mysql" % "mysql-connector-java" % "6.0.6"
 libraryDependencies += "com.h2database" % "h2" % "1.4.199"
 
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3" % Test
@@ -30,7 +30,8 @@ dockerBaseImage := "anapsix/alpine-java:8_jdk"
 dockerRepository := Some("eu.gcr.io/softwaremill-playground-2")
 
 dockerEntrypoint := Seq(
-  "bin/play-scala-data-reporting"
+  "bin/play-scala-data-reporting",
+  "-Dconfig.resource=application-prod.conf"
 )
 
 
