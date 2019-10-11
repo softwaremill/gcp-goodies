@@ -15,14 +15,12 @@ spec:
     spec:
       containers:
         - name: web
-          image: eu.gcr.io/softwaremill-playground-2/play-scala-data-reporting:1.18
+          image: eu.gcr.io/softwaremill-playground-2/play-scala-data-reporting:1.20
           ports:
             - containerPort: 80
           env:
             - name: MYSQL_SERVICE_HOST
-              value: 127.0.0.1:3306
-            - name: MYSQL_SERVICE_PORT
-              value: 3306
+              value: 127.0.0.1
             # These secrets are required to start the pod.
             # [START cloudsql_secrets]
             - name: MYSQL_USER
