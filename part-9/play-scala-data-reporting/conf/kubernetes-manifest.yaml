@@ -42,10 +42,10 @@ spec:
         - name: cloudsql-proxy
           image: gcr.io/cloudsql-docker/gce-proxy:1.14
           command: ["/cloud_sql_proxy",
-                    "-instances=softwaremill-playground-2:us-west1:datareportingdbf2=tcp:3306",
+                    "-instances=softwaremill-playground-2:us-west1:datastorage=tcp:3306",
             # If running on a VPC, the Cloud SQL proxy can connect via Private IP. See:
             # https://cloud.google.com/sql/docs/mysql/private-ip for more info.
-            # "-ip_address_types=PRIVATE",
+#             "-ip_address_types=PRIVATE",
                     "-credential_file=/secrets/cloudsql/credentials.json"]
           # [START cloudsql_security_context]
           securityContext:
