@@ -3,8 +3,11 @@ package actor
 import java.util.Date
 
 import akka.actor.{Actor, ActorLogging}
+import akka.stream.Materializer
+import akka.stream.scaladsl.{Sink, Source}
 import javax.inject.Inject
 import play.api.Configuration
+import repositories.RoomDataRepository
 import services.OccupancyDataProvider
 
 import scala.concurrent.ExecutionContext
@@ -15,8 +18,9 @@ case object PushToDatabaseCommand extends Command
 
 class WorkerActor @Inject()(
   conf: Configuration,
-  occupancyDataProvider: OccupancyDataProvider
-)(implicit val ec: ExecutionContext)
+  occupancyDataProvider: OccupancyDataProvider,
+  roomDataRepository: RoomDataRepository
+)(implicit val ec: ExecutionContext, mat: Materializer)
     extends Actor
     with ActorLogging {
 
@@ -35,7 +39,13 @@ class WorkerActor @Inject()(
   def pushToDatabase(): Unit = {
     val random = new Random
     occupancyDataProvider.readFile().onComplete {
-      case Success(data) => ()
+      case Success(data) =>
+        val dt = data(random.nextInt(data.size))
+        roomDataRepository.create(temperature = dt.temperature,
+          humidity = dt.humidity,
+          light = dt.light,
+          co2 = dt.co2,
+          humidityRatio = dt.humidityRatio).map(_ => ())
       case Failure(exception) =>
         log.error(s"WorkerActor exception ${exception.getMessage}")
     }

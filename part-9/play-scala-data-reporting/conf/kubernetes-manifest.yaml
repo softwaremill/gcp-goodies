@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: eu.gcr.io/softwaremill-playground-2/play-scala-data-reporting:1.20
+          image: eu.gcr.io/softwaremill-playground-2/play-scala-data-reporting:1.21
           ports:
             - containerPort: 80
           env:
@@ -33,6 +33,10 @@ spec:
                 secretKeyRef:
                   name: cloudsql-db-credentials
                   key: password
+          volumeMounts:
+            - name: "config"
+              mountPath: "/datatraining.txt"
+              subPath: "datatraining.txt"
             # [END cloudsql_secrets]
         # Change <INSTANCE_CONNECTION_NAME> here to include your GCP
         # project, the region of your Cloud SQL instance and the name
@@ -62,4 +66,7 @@ spec:
         - name: cloudsql-instance-credentials
           secret:
             secretName: cloudsql-instance-credentials
+        - name: "config"
+          configMap:
+            name: "config"
       # [END volumes]
