@@ -1,10 +1,7 @@
 package actor
 
-import java.util.Date
-
 import akka.actor.{Actor, ActorLogging}
 import akka.stream.Materializer
-import akka.stream.scaladsl.{Sink, Source}
 import javax.inject.Inject
 import play.api.Configuration
 import repositories.RoomDataRepository
@@ -41,11 +38,18 @@ class WorkerActor @Inject()(
     occupancyDataProvider.readFile().onComplete {
       case Success(data) =>
         val dt = data(random.nextInt(data.size))
-        roomDataRepository.create(temperature = dt.temperature,
-          humidity = dt.humidity,
-          light = dt.light,
-          co2 = dt.co2,
-          humidityRatio = dt.humidityRatio).map(_ => ())
+        roomDataRepository
+          .create(
+            temperature = dt.temperature,
+            humidity = dt.humidity,
+            light = dt.light,
+            co2 = dt.co2,
+            humidityRatio = dt.humidityRatio
+          )
+          .onComplete {
+            case Success(_)  => log.info("record added")
+            case Failure(ex) => log.error(s"Record not added: ${ex.getMessage}")
+          }
       case Failure(exception) =>
         log.error(s"WorkerActor exception ${exception.getMessage}")
     }

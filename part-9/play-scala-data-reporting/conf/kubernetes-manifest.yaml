@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: eu.gcr.io/softwaremill-playground-2/play-scala-data-reporting:1.21
+          image: eu.gcr.io/softwaremill-playground-2/play-scala-data-reporting:1.22
           ports:
             - containerPort: 80
           env:
@@ -46,7 +46,7 @@ spec:
         - name: cloudsql-proxy
           image: gcr.io/cloudsql-docker/gce-proxy:1.14
           command: ["/cloud_sql_proxy",
-                    "-instances=softwaremill-playground-2:us-west1:datastorage=tcp:3306",
+                    "-instances=softwaremill-playground-2:us-west2:datastorage3=tcp:3306",
             # If running on a VPC, the Cloud SQL proxy can connect via Private IP. See:
             # https://cloud.google.com/sql/docs/mysql/private-ip for more info.
 #             "-ip_address_types=PRIVATE",
