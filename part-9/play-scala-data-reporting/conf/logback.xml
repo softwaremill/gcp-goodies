@@ -1,53 +1,18 @@
-<!-- https://www.playframework.com/documentation/latest/SettingsLogger -->
+<?xml version="1.0" encoding="UTF-8"?>
+
 <configuration>
-
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-    <filter class="ch.qos.logback.classic.filter.LevelFilter">
-      <level>INFO</level>
-      <onMatch>ACCEPT</onMatch>
-      <onMismatch>DENY</onMismatch>
-    </filter>
-    <filter class="ch.qos.logback.classic.filter.LevelFilter">
-      <level>WARN</level>
-      <onMatch>ACCEPT</onMatch>
-      <onMismatch>DENY</onMismatch>
-    </filter>
-    <target>System.out</target>
     <encoder>
-      <pattern>LOG %date [%level] %logger - %thread: %message%n%xException</pattern>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
     </encoder>
   </appender>
 
-  <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
-    <filter class="ch.qos.logback.classic.filter.LevelFilter">
-      <level>ERROR</level>
-      <onMatch>ACCEPT</onMatch>
-      <onMismatch>DENY</onMismatch>
-    </filter>
-    <target>System.err</target>
-    <encoder>
-      <pattern>LOG ERR %date [%level] %logger - %thread: %message%n%xException</pattern>
-    </encoder>
-  </appender>
-
-  <appender name="ASYNCSTDOUT" class="ch.qos.logback.classic.AsyncAppender">
-    <appender-ref ref="STDOUT" />
-  </appender>
-
-  <appender name="ASYNCSTDERR" class="ch.qos.logback.classic.AsyncAppender">
-    <appender-ref ref="STDERR" />
-  </appender>
-
-
-  <!-- Off these ones as they are annoying, and anyway we manage configuration ourselves -->
-  <logger name="com.avaje.ebean.config.PropertyMapLoader" level="OFF" />
-  <logger name="com.avaje.ebeaninternal.server.core.XmlConfigLoader" level="OFF" />
-  <logger name="com.avaje.ebeaninternal.server.lib.BackgroundThread" level="OFF" />
-  <logger name="com.gargoylesoftware.htmlunit.javascript" level="OFF" />
+  <logger name="application" level="DEBUG"/>
+  <logger name="com.zaxxer.hikari" level="INFO"/>
+  <logger name="slick" level="DEBUG"/>
+  <logger name="scala.slick" level="DEBUG" />
 
   <root level="DEBUG">
-    <appender-ref ref="ASYNCSTDOUT" />
-    <appender-ref ref="ASYNCSTDERR" />
+    <appender-ref ref="STDOUT"/>
   </root>
-
 </configuration>

@@ -8,8 +8,14 @@ import slick.jdbc.JdbcProfile
 
 import scala.concurrent.{ExecutionContext, Future}
 
+/**
+ * A repository for people.
+ *
+ * @param dbConfigProvider The Play db config provider. Play will inject this for you.
+ */
 @Singleton
 class RoomDataRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(implicit ec: ExecutionContext) {
+  // We want the JdbcProfile for this provider
   private val dbConfig = dbConfigProvider.get[JdbcProfile]
 
   import dbConfig._
@@ -31,12 +37,17 @@ class RoomDataRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(im
   private val roomData = TableQuery[RoomDataTable]
 
   def create(temperature: Double, humidity: Double, light: Double, co2: Double, humidityRatio: Double): Future[RoomData] = db.run {
-    (roomData.map(rd => (rd.temperature, rd.humidity, rd.light, rd.co2, rd.humidityRatio))
+    val query = (roomData.map(rd => (rd.temperature, rd.humidity, rd.light, rd.co2, rd.humidityRatio))
       returning roomData.map(_.id)
       into ((res, id) => RoomData(id, res._1, res._2, res._3, res._4, res._5))
-      ) += (temperature, humidity, light, co2, humidityRatio)
+      )
+    println("query: " + query)
+    query += (temperature, humidity, light, co2, humidityRatio)
   }
 
+  /**
+   * List all the people in the database.
+   */
   def list(): Future[Seq[RoomData]] = db.run {
     roomData.result
   }
