@@ -1,2 +1,5 @@
 selenium
 pynput
+google-api-python-client
+google-cloud-storage
+Pillow
